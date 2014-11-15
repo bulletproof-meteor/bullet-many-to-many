@@ -1,0 +1,34 @@
+<head>
+  <title>Mini Kadira</title>
+</head>
+
+<body>
+  {{> app}}
+</body>
+
+<template name="app">
+  <div id='app' class="container">
+    <h2>Mini Kadira</h2>
+      {{#if currentUser}}
+        Hello, {{currentUser.name}}
+        <hr>
+        <h4>My Apps</h4>
+        <select id="myapps" size=10>
+          {{#each myApps}}
+            <option value="{{_id}}">{{name}}</option>
+          {{/each}}
+        </select>
+
+        {{#if currentApp}}
+          <h4>Colloborators of: "{{currentApp.name}}"</h4>
+          <ul>
+            {{#each currentColloborators}}
+              <li>{{name}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      {{else}}
+        Please Login in.
+      {{/if}}
+  </div>
+</template>
