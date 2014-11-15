@@ -7,6 +7,36 @@ Logout = function() {
   Login(null);
 };
 
+AddColloborator = function(username) {
+  var currentApp = Session.get('currentApp');
+  if(!currentApp) {
+    throw new Error("You've not selected an app");
+  }
+
+  Meteor.call('addColloborator', currentApp, username, function(err) {
+    if(err) {
+      console.log('colloborator adding failed!: ', err.message);
+    } else {
+      console.log('colloborator added!');
+    }
+  });
+};
+
+RemoveColloborator = function(username) {
+  var currentApp = Session.get('currentApp');
+  if(!currentApp) {
+    throw new Error("You've not selected an app");
+  }
+
+  Meteor.call('removeColloborator', currentApp, username, function(err) {
+    if(err) {
+      console.log('colloborator removing failed!: ', err.message);
+    } else {
+      console.log('colloborator removed!');
+    }
+  });
+};
+
 Template.app.helpers({
   currentUser: function() {
     return Users.findOne(Session.get('currentUser'));

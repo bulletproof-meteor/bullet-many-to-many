@@ -7,7 +7,15 @@ if(!Users.findOne()) {
 }
 
 if(!Apps.findOne()) {
-  Apps.insert({name: "Kadira UI", colloborators: ["arunoda", "thanish"]});
-  Apps.insert({name: "Discover Meteor", colloborators: ["arunoda", "sacha"]});
-  Apps.insert({name: "Microscope", colloborators: ["tom", "sacha"]});
+  Apps.insert({_id: "kadira", name: "Kadira UI"});
+  Apps.insert({_id: "dm", name: "Discover Meteor"});
+  Apps.insert({_id: "micro", name: "Microscope"});
+
+  Meteor.call('addColloborator', "kadira", "arunoda");
+  Meteor.call('addColloborator', "kadira", "pahan");
+
+  Meteor.call('addColloborator', "dm", "sacha");
+  Meteor.call('addColloborator', "dm", "tom");
+
+  Meteor.call('addColloborator', "micro", "tom");
 }

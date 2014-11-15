@@ -14,3 +14,13 @@ Meteor.publish('getColloborators', function(appId) {
     this.ready();
   }
 });
+
+Meteor.methods({
+  addColloborator: function(appId, username) {
+    Apps.update(appId, {$push: {colloborators: username}});
+  },
+
+  removeColloborator: function(appId, username) {
+    Apps.update(appId, {$pull: {colloborators: username}});
+  }
+});
