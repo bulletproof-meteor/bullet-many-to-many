@@ -3,24 +3,24 @@ Meteor.publish('currentUser', function(username) {
 });
 
 Meteor.publish('myApps', function(username) {
-  return Apps.find({colloborators: username});
+  return Apps.find({collaborators: username});
 });
 
-Meteor.publish('getColloborators', function(appId) {
+Meteor.publish('getCollaborators', function(appId) {
   var app = Apps.findOne({_id: appId});
   if(app) {
-    return Users.find({_id: {$in: app.colloborators}});
+    return Users.find({_id: {$in: app.collaborators}});
   } else {
     this.ready();
   }
 });
 
 Meteor.methods({
-  addColloborator: function(appId, username) {
-    Apps.update(appId, {$push: {colloborators: username}});
+  addCollaborator: function(appId, username) {
+    Apps.update(appId, {$push: {collaborators: username}});
   },
 
-  removeColloborator: function(appId, username) {
-    Apps.update(appId, {$pull: {colloborators: username}});
+  removeCollaborator: function(appId, username) {
+    Apps.update(appId, {$pull: {collaborators: username}});
   }
 });

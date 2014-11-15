@@ -11,11 +11,11 @@ if(!Apps.findOne()) {
   Apps.insert({_id: "dm", name: "Discover Meteor"});
   Apps.insert({_id: "micro", name: "Microscope"});
 
-  Meteor.call('addColloborator', "kadira", "arunoda");
-  Meteor.call('addColloborator', "kadira", "pahan");
+  Meteor.call('addCollaborator', "kadira", "arunoda");
+  Meteor.call('addCollaborator', "kadira", "pahan");
 
-  Meteor.call('addColloborator', "dm", "sacha");
-  Meteor.call('addColloborator', "dm", "tom");
+  Meteor.call('addCollaborator', "dm", "sacha");
+  Meteor.call('addCollaborator', "dm", "tom");
 
-  Meteor.call('addColloborator', "micro", "tom");
+  Meteor.call('addCollaborator', "micro", "tom");
 }

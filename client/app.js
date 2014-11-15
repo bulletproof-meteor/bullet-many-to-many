@@ -7,32 +7,32 @@ Logout = function() {
   Login(null);
 };
 
-AddColloborator = function(username) {
+AddCollaborator = function(username) {
   var currentApp = Session.get('currentApp');
   if(!currentApp) {
     throw new Error("You've not selected an app");
   }
 
-  Meteor.call('addColloborator', currentApp, username, function(err) {
+  Meteor.call('addCollaborator', currentApp, username, function(err) {
     if(err) {
-      console.log('colloborator adding failed!: ', err.message);
+      console.log('collaborator adding failed!: ', err.message);
     } else {
-      console.log('colloborator added!');
+      console.log('collaborator added!');
     }
   });
 };
 
-RemoveColloborator = function(username) {
+RemoveCollaborator = function(username) {
   var currentApp = Session.get('currentApp');
   if(!currentApp) {
     throw new Error("You've not selected an app");
   }
 
-  Meteor.call('removeColloborator', currentApp, username, function(err) {
+  Meteor.call('removeCollaborator', currentApp, username, function(err) {
     if(err) {
-      console.log('colloborator removing failed!: ', err.message);
+      console.log('collaborator removing failed!: ', err.message);
     } else {
-      console.log('colloborator removed!');
+      console.log('collaborator removed!');
     }
   });
 };
@@ -44,17 +44,17 @@ Template.app.helpers({
 
   myApps: function() {
     var currentUser = Session.get('currentUser');
-    return Apps.find({colloborators: currentUser});
+    return Apps.find({collaborators: currentUser});
   },
 
   currentApp: function() {
     return Apps.findOne(Session.get('currentApp'));
   },
 
-  currentColloborators: function() {
+  currentCollaborators: function() {
     var app = Apps.findOne(Session.get('currentApp'));
     if(app) {
-      return Users.find({_id: {$in: app.colloborators}});
+      return Users.find({_id: {$in: app.collaborators}});
     }
   } 
 });
@@ -74,7 +74,7 @@ Tracker.autorun(function() {
 
 Tracker.autorun(function() {
   var currentApp = Session.get('currentApp');
-  Meteor.subscribe('getColloborators', currentApp);
+  Meteor.subscribe('getCollaborators', currentApp);
 });
 
 Meteor.startup(function() {
